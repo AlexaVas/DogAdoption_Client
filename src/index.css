@@ -1,4 +1,5 @@
-body {
+/* Previous styles for index.css */
+/* body {
   margin: 0;
 }
 
@@ -100,4 +101,8 @@ img {
 width: 200px;
 
 
-}
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
