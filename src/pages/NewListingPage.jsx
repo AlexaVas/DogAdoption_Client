@@ -8,9 +8,11 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:5008";
 
-function ShelterProfile (props) {
+function NewListing (props) {
 
 const { user } = useContext(AuthContext);
+
+
 
 
  const [name, setName] = useState("");
@@ -19,6 +21,17 @@ const { user } = useContext(AuthContext);
  const [phone, setPhone] = useState("");
  const [image, setImage] = useState("");
  const [description, setDescription] = useState("");
+const [profileId, setProfileId] = useState("");
+const [shelterName, setShelterName] = useState("");
+
+  useEffect(() => {
+
+    setProfileId(user._id);
+    setShelterName(user.name);
+
+  }, [name]);
+
+    
 
  const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -34,7 +47,7 @@ const { user } = useContext(AuthContext);
  const handleDogSubmit = (e) => {
    e.preventDefault();
    // Create an object representing the request body
-   const requestBody = {name, breed, age, phone, image, description};
+   const requestBody = {name, breed, age, phone, image, description, profileId, shelterName};
 
    // Make an axios request to the API
    // If the POST request is a successful redirect to the login page
@@ -42,7 +55,8 @@ const { user } = useContext(AuthContext);
    axios
      .post(`${API_URL}/shelter/profile`, requestBody)
      .then((response) => {
-       navigate("/my-listings");
+        console.log(response);
+       
      })
      .catch((error) => {
        const errorDescription = error.response.data.message;
@@ -55,15 +69,13 @@ const { user } = useContext(AuthContext);
      setPhone("");
      setImage("");
      setDescription("");
-
+     setProfileId("");
  };
   
 
 return (
   <div>
-    <h1>Welcome to your profile! </h1>
-
-    <h2>Shelter: {user.name}</h2>
+    
 
     <h2>Add a new listing:</h2>
 
@@ -125,4 +137,4 @@ return (
 }
 
 
-export default ShelterProfile;
+export default NewListing;

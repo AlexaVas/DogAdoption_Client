@@ -48,6 +48,10 @@ function Navbar() {
               <button>Profile</button>
             </Link>
 
+            <Link to="/shelter/listing">
+              <button>Add Listing</button>
+            </Link>
+
             <button onClick={logOutUser}>Logout</button>
             <span>{user && user.name}</span>
           </>

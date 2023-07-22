@@ -48,11 +48,7 @@ function HomePage() {
             <article key={profile._id}>
               <h3>Name: {profile.name}</h3>
               <p>Breed: {profile.breed}</p>
-              <p>Age: {profile.age}</p>
               <img src={profile.image}></img>
-              <p>
-                A little bit about {profile.name}: {profile.description}
-              </p>
             </article>
             <Link to={`/view/${profile._id}`}>
               <button>View</button>

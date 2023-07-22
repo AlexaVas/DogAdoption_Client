@@ -9,10 +9,13 @@ import Navbar from "./components/Navbar"; // <== IMPORT
 import HomePage from "./pages/HomePage"; // <== IMPORT
 import SignupPage from "./pages/SignupPage";
 import SignUpLogInShelter from "./pages/sl_shelter";
-import ShelterProfile from "./pages/ShelterProfilePage";
+import NewListing from "./pages/NewListingPage";
 import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
+import ShelterProfile from "./pages/ShelterProfile";
+import EditDogPage from "./pages/EditDogPage";
+import ViewPage from "./pages/ViewPage";
 
 function App() {
   return (
@@ -82,11 +85,41 @@ function App() {
         />
 
         <Route
+          path="/shelter/listing"
+          element={
+            <IsPrivate>
+              {" "}
+              <NewListing />{" "}
+            </IsPrivate>
+          }
+        />
+
+        <Route
           path="/shelter/profile"
           element={
             <IsPrivate>
               {" "}
               <ShelterProfile />{" "}
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/profile/edit/:dogId"
+          element={
+            <IsPrivate>
+              {" "}
+              <EditDogPage />{" "}
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/view/:dogId"
+          element={
+            <IsPrivate>
+              {" "}
+              <ViewPage />{" "}
             </IsPrivate>
           }
         />
