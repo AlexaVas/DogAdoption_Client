@@ -2,9 +2,9 @@
 
 import "./App.css";
 import { Routes, Route } from "react-router-dom"; // <== IMPORT
-import ProjectListPage from "./pages/ProjectListPage"; 
-import ProjectDetailsPage from "./pages/ProjectDetailsPage";    
-import EditProjectPage from "./pages/EditProjectPage";   
+// import ProjectListPage from "./pages/ProjectListPage"; 
+// import ProjectDetailsPage from "./pages/ProjectDetailsPage";    
+// import EditProjectPage from "./pages/EditProjectPage";   
 import Navbar from "./components/Navbar"; // <== IMPORT
 import HomePage from "./pages/HomePage"; // <== IMPORT
 import SignupPage from "./pages/SignupPage";
@@ -16,6 +16,7 @@ import IsAnon from "./components/IsAnon";
 import ShelterProfile from "./pages/ShelterProfile";
 import EditDogPage from "./pages/EditDogPage";
 import ViewPage from "./pages/ViewPage";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
@@ -25,36 +26,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route
-          path="/projects"
-          element={
-            <IsPrivate>
-              {" "}
-              <ProjectListPage />{" "}
-            </IsPrivate>
-          }
-        />
-
-        <Route
-          path="/projects/:projectId"
-          element={
-            <IsPrivate>
-              {" "}
-              <ProjectDetailsPage />{" "}
-            </IsPrivate>
-          }
-        />
-
-        <Route
-          path="/projects/edit/:projectId"
-          element={
-            <IsPrivate>
-              {" "}
-              <EditProjectPage />{" "}
-            </IsPrivate>
-          }
-        />
-
         <Route
           path="/signup"
           element={
@@ -120,6 +91,16 @@ function App() {
             <IsPrivate>
               {" "}
               <ViewPage />{" "}
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/user/favorites"
+          element={
+            <IsPrivate>
+              {" "}
+              <FavoritesPage />{" "}
             </IsPrivate>
           }
         />

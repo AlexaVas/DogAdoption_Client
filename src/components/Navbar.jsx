@@ -84,7 +84,7 @@ function Navbar() {
 
         {isLoggedIn && (
           <>
-            <Link to="/projects">
+            <Link to="/user/favorites">
               <button>Favorites</button>
             </Link>
 
