@@ -42,7 +42,8 @@ function SignUpLogInShelter(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name, location, phone, description };
+    const locationL = location.toLowerCase();
+    const requestBody = { email, password, name, locationL, phone, description };
 
     // Make an axios request to the API
     // If the POST request is a successful redirect to the login page
@@ -51,7 +52,13 @@ function SignUpLogInShelter(props) {
       .post(`${API_URL}/auth/signup/shelter`, requestBody)
       .then((response) => {
 
-        navigate("/shelter");
+           setEmail("");
+           setPassword("");
+           setName("");
+           setLocation("");
+           setPhone("");
+           setDescription("");
+        
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -89,8 +96,7 @@ function SignUpLogInShelter(props) {
 
       .then((res) => {
         console.log("This is the result " + res);
-        // navigate("/shelter/profile");
-
+        
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -173,7 +179,7 @@ function SignUpLogInShelter(props) {
 
         <label>Phone:</label>
         <input
-          type="number"
+          type="phone"
           name="phone"
           placeholder="+49 178 4916825"
           value={phone}

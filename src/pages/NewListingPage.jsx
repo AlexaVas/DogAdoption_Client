@@ -15,6 +15,7 @@ const { user } = useContext(AuthContext);
 
 
 
+
  const [name, setName] = useState("");
  const [breed, setBreed] = useState("");
  const [age, setAge] = useState("");
@@ -23,15 +24,17 @@ const { user } = useContext(AuthContext);
  const [description, setDescription] = useState("");
 const [profileId, setProfileId] = useState("");
 const [shelterName, setShelterName] = useState("");
+const [shelterLocation, setShelterLocation] = useState("");
 
   useEffect(() => {
 
     setProfileId(user._id);
     setShelterName(user.name);
+    setShelterLocation(user.location);
 
   }, [name]);
 
-    
+    console.log(user.location);
 
  const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -41,13 +44,24 @@ const [shelterName, setShelterName] = useState("");
  const handleBreed = (e) => setBreed(e.target.value);
  const handleAge = (e) => setAge(e.target.value);
  const handlePhone = (e) => setPhone(e.target.value);
- const handleImage = (e) => setImage(e.target.value);
+ const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+        console.log(image)
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
  const handleDescription = (e) => setDescription(e.target.value);
 
  const handleDogSubmit = (e) => {
    e.preventDefault();
    // Create an object representing the request body
-   const requestBody = {name, breed, age, phone, image, description, profileId, shelterName};
+   const requestBody = {name, breed, age, phone, image, description, profileId, shelterName, shelterLocation};
 
    // Make an axios request to the API
    // If the POST request is a successful redirect to the login page
@@ -72,6 +86,7 @@ const [shelterName, setShelterName] = useState("");
      setProfileId("");
  };
   
+  console.log(image);
 
 return (
   <div>
@@ -114,9 +129,9 @@ return (
       />
       <label>Image:</label>
       <input
-        type="text"
+        type="file"
         name="image"
-        value={image}
+        accept="image/*"
         onChange={handleImage}
       />
       <label>Description:</label>

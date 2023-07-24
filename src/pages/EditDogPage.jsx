@@ -38,6 +38,18 @@ function EditDogPage(props) {
       .catch((error) => console.log(error));
   }, [dogId]);
 
+    const handleImage = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImage(reader.result);
+          console.log(image); // This will log the base64 representation of the image
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
   const handleFormSubmit = (e) => {
     // <== ADD
     e.preventDefault();
@@ -97,10 +109,10 @@ function EditDogPage(props) {
         />
         <label>Image:</label>
         <input
-          type="text"
+          type="file"
           name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
+          accept="image/*"
+          onChange={handleImage}
         />
 
         <label>Description:</label>
