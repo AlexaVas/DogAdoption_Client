@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import DogHomeCard from "../components/DogHomeCard";
 import HeroSection from "../components/HeroSection";
 import FooterSection from "../components/FooterSection";

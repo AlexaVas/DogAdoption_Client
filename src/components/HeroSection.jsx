@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import dogWithGirl from '../assets/dogWithGirl.png';
-import ShelterBox from './ShelterBox';
+// import ShelterBox from './ShelterBox';
 
 export default function HeroSection() {
 
@@ -45,7 +45,7 @@ export default function HeroSection() {
                 Search through our list of nearby animal shelters and find your new best friend. All dogs are vaccinated, spayed/neutered, microchipped, and looking forward to find their forever home.
               </p>
               <div className="mt-10 flex items-center gap-x-6">
-                <ShelterBox />
+                {/* <ShelterBox /> */}
               </div>
             </div>
             <div className="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow">
