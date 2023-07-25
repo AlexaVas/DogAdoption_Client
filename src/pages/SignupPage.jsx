@@ -36,7 +36,7 @@ function SignupPage(props) {
         setErrorMessage(errorDescription);
       });
   };
-  
+
   return (
     <div className="SignupPage">
       <h1>Sign Up</h1>
@@ -68,4 +68,3 @@ function SignupPage(props) {
 }
 
 export default SignupPage;
- 
