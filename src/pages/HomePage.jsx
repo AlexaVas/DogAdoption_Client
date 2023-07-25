@@ -71,7 +71,7 @@ function HomePage() {
                 Search by city:
               </h2>
 
-              <form className="flex mb-5" onSubmit={handleSearchSubmit}>
+              <form className="flex mb-12" onSubmit={handleSearchSubmit}>
                 <div className="w-full max-w-lg lg:max-w-xs">
                   <label htmlFor="search" className="sr-only">
                     Search
@@ -101,32 +101,38 @@ function HomePage() {
                 </button>
               </form>
 
-              <div className="w-full">
+              <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
 
               {/* Use isLoading to determine when to show the LoadingSpinner */}
               {isLoading ? (
                 <LoadingSpinner />
               ) : (
                 <>
-                  {filteredDogs.length > 0 && dogs.length > 0 ? (
-                    filteredDogs.map((profile) => (
-                      <div key={profile._id}>
-                        <article>
-                          <h3>Name: {profile.name}</h3>
-                          <p>Breed: {profile.breed}</p>
-                          <img src={profile.image} alt={profile.name} />
-                        </article>
-                        <Link to={`/view/${profile._id}`}>
-                          <button>View</button>
-                        </Link>
-                      </div>
-                    ))
+                {filteredDogs.length > 0 && dogs.length > 0 ? (
+  filteredDogs.map((profile) => (
+    <li className="flex flex-wrap justify-center" key={profile._id}>
+      <div className="group w-full overflow-hidden rounded-lg shadow-md">
+        <div className="aspect-h-5 aspect-w-6">
+          <img className="pointer-events-none object-cover group-hover:opacity-75" src={profile.image} alt={profile.name} />
+        </div>
+        <div className="px-4 pb-4">
+        <h3 className="pointer-events-none mt-2 block truncate text-lg font-medium text-gray-900">{profile.name}</h3>
+        <p className="pointer-events-none block text-md font-medium text-gray-500 mb-1">{profile.breed}</p>
+        <p className="pointer-events-none block text-md font-medium text-gray-400 mb-3">{profile.shelterName}</p>
+        <Link to={`/view/${profile._id}`}>
+        <button className="py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded">View</button>
+        </Link>
+        </div>
+      </div>
+    </li>
+  ))
                   ) : (
                     <h3>No dogs available in this city.</h3>
                   )}
                 </>
               )}
-              </div>
+
+              </ul>
             </div>
           </div>
         </div>
