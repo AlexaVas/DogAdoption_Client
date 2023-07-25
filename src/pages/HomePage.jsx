@@ -53,13 +53,13 @@ function HomePage() {
   console.log(search);
 
   return (
-    <div className="relative isolate pt-14">
+    <div className="relative isolate pt-6">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-32">
         <div className="mx-auto lg:mx-0 lg:flex-auto">
           <h1 className="mt-10 max-w-lg text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Find dogs at animal shelters near you
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600 mb-24">
             Search through our list of nearby shelters to see the dogs available
             for adoption in your area. Each one comes neutered, vaccinated and
             microchipped, and is covered by Petplan insurance for the first four
@@ -71,7 +71,7 @@ function HomePage() {
                 Search by city:
               </h2>
 
-              <form className="flex mb-12" onSubmit={handleSearchSubmit}>
+              <form className="flex mb-4" onSubmit={handleSearchSubmit}>
                 <div className="w-full max-w-lg lg:max-w-xs">
                   <label htmlFor="search" className="sr-only">
                     Search
@@ -100,6 +100,7 @@ function HomePage() {
                   Search
                 </button>
               </form>
+              <br></br>
 
               <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
 

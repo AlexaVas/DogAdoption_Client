@@ -6,7 +6,6 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Gpt from "../components/Gpt";
 
-
 const API_URL = "http://localhost:5008";
 
 function ViewPage() {
@@ -20,7 +19,6 @@ function ViewPage() {
   console.log(dogId);
 
   useEffect(() => {
-
     const storedToken = localStorage.getItem("authToken");
     console.log(storedToken);
     axios
@@ -35,74 +33,85 @@ function ViewPage() {
       .catch((error) => console.log(error));
   }, []);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleFavorites = () => {
+    const storedToken = localStorage.getItem("authToken");
+    console.log(storedToken);
 
-
-
-     const storedToken = localStorage.getItem("authToken");
-     console.log(storedToken);
-
-     axios
-       .post(`${API_URL}/user/dog-list/${dogId}`,{}, {
-         headers: { Authorization: `Bearer ${storedToken}` },
-       })
-       .then((response) => {
-         const selectedDog = response.data;
-         console.log(selectedDog);
-       })
-       .then(() => navigate("/"))
-       .catch((error) => console.log(error));
-
-
-  }
+    axios
+      .post(
+        `${API_URL}/user/dog-list/${dogId}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      )
+      .then((response) => {
+        const selectedDog = response.data;
+        console.log(selectedDog);
+      })
+      .then(() => navigate("/"))
+      .catch((error) => console.log(error));
+  };
 
   return (
-    <div>
-      {dog ? (
-        <div>
-          <article>
-            <h1>Get to know {dog.name}</h1>
-            <p>Breed: {dog.breed}</p>
-
-            <p>Age: {dog.age}</p>
-            <img src={dog.image}></img>
-            <p>
-              A little bit about {dog.name}: {dog.description}
-            </p>
-
-            <p>
-              {" "}
-              {dog.name} is currently based at {dog.shelterName}. Call or text{" "}
-              +{dog.phone} to get an appointment and meet {dog.name} in person!
-            </p>
-
-            {dog.user.length > 1 ? (
-                <div>
-              <p>
-                {dog.user.length} people are already interested in {dog.name} !
-                Get in touch with {dog.shelterName} to not miss your chance!
+    <div className="relative isolate">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
+        {dog ? (
+          <div className="flex flex-col lg:flex-row">
+            <div className="aspect-w-4 aspect-h-2 w-full lg:w-1/2">
+              <img
+                className="object-cover rounded-lg"
+                src={dog.image}
+                alt={dog.name}
+              />
+            </div>
+            <div className="mt-6 lg:mt-0 lg:w-1/2 lg:pl-8">
+              <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                {dog.name}
+              </h1>
+              <h2 className="text-lg leading-8 text-gray-700">
+                Breed: {dog.breed}
+              </h2>
+              <p className="text-md block text-gray-600">Age: {dog.age}</p>
+              <h4 className="text-lg font-semibold leading-8 text-gray-800 pt-5">
+                Description
+              </h4>
+              <p className="text-gray-600">{dog.description}</p>
+              <h4 className="text-lg font-semibold leading-8 text-gray-800 pt-5">
+                How to adopt
+              </h4>
+              <p className="pb-5 text-gray-600">
+                {dog.name} is currently based at {dog.shelterName}. Call or text
+                +{dog.phone} to get an appointment and meet {dog.name} in
+                person!
               </p>
-
-              </div>
-            ) : (
-              <p></p>
-            )}
-          </article>
-
-                <div>
-                    <Gpt breed={dog.breed} name={dog.name}></Gpt>
-                </div>
-
-
-          {user.userType === "user" ? (<button onClick={handleFavorites}>Add to favorites</button>):(<p></p>)}
+              {dog.user.length > 1 ? (
+                <p>
+                  {dog.user.length} people are already interested in {dog.name}!
+                  Get in touch with {dog.shelterName} to not miss your chance!
+                </p>
+              ) : null}
+              {user.userType === "user" ? (
+                <button
+                  onClick={handleFavorites}
+                  className="flex mt-8 max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                >
+                  Add to favorites
+                </button>
+              ) : null}
+            </div>
+          </div>
+        ) : (
+          <h1>Loading...</h1>
+        )}
+        <div className="mt-10">
+          <div>
+            <Gpt breed={dog.breed} name={dog.name}></Gpt>
+          </div>
         </div>
-      ) : (
-        <h1>Lodaing...</h1>
-      )}
-
-
+      </div>
     </div>
   );
 }
