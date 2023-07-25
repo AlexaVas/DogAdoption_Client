@@ -43,7 +43,7 @@ function SignUpLogInShelter(props) {
     e.preventDefault();
     // Create an object representing the request body
     const locationL = location.toLowerCase();
-    const requestBody = { email, password, name, locationL, phone, description };
+    const requestBody = { email, password, name, location:locationL, phone, description };
 
     // Make an axios request to the API
     // If the POST request is a successful redirect to the login page

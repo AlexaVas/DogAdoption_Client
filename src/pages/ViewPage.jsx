@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Gpt from "../components/Gpt";
 
 
 const API_URL = "http://localhost:5008";
@@ -78,19 +79,30 @@ const navigate = useNavigate();
             </p>
 
             {dog.user.length > 1 ? (
+                <div>
               <p>
                 {dog.user.length} people are already interested in {dog.name} !
                 Get in touch with {dog.shelterName} to not miss your chance!
               </p>
+                
+              </div>
             ) : (
               <p></p>
             )}
           </article>
+          
+                <div>
+                    <Gpt breed={dog.breed} name={dog.name}></Gpt>
+                </div>
+
+
           {user.userType === "user" ? (<button onClick={handleFavorites}>Add to favorites</button>):(<p></p>)}
         </div>
       ) : (
         <h1>Lodaing...</h1>
       )}
+
+      
     </div>
   );
 }
