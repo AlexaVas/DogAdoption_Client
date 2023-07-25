@@ -58,7 +58,7 @@ function SignUpLogInShelter(props) {
            setLocation("");
            setPhone("");
            setDescription("");
-        
+
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -76,12 +76,12 @@ function SignUpLogInShelter(props) {
       "password": logInPassword,
     };
 
-   
+
     // Make an axios request to the API
     // If the POST request is a successful redirect to the login page
     // If the request resolves with an error, set the error message in the state
 
-    
+
     axios
       .post(`${API_URL}/auth/login/shelter`, requestLogInBody)
       .then((response) => {
@@ -96,7 +96,7 @@ function SignUpLogInShelter(props) {
 
       .then((res) => {
         console.log("This is the result " + res);
-        
+
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -104,7 +104,7 @@ function SignUpLogInShelter(props) {
       });
 
     }
-  
+
 
 
   return (
@@ -202,7 +202,7 @@ function SignUpLogInShelter(props) {
     </div>
   );
 
-  
+
 }
 
 export default SignUpLogInShelter;
