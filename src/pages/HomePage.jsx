@@ -8,15 +8,15 @@ const API_URL = "http://localhost:5008";
 
 function HomePage() {
 
-  
+
 
 
   const [dogs, setDogs] = useState([]);
   const [filteredDogs, setFilteredDogs] = useState([]);
   console.log(dogs);
-  
+
   useEffect(() => {
-    
+
 
 
 
@@ -31,10 +31,10 @@ function HomePage() {
       .catch((error) => console.log(error));
 
 
-      
 
 
-     
+
+
   }, []);
 
 
@@ -48,26 +48,30 @@ function HomePage() {
   } else {
 
     const searchL = search.toLowerCase();
-    
+
   const filteredDogs = dogs.filter((dog) => dog.location == searchL);
   setFilteredDogs(filteredDogs);
 
   }
 
-  
+
 
  }
 
  const handleSearch = (e) => { setSearch(e.target.value);};
 
-  
-  
+
+
 console.log(search);
 
   return (
     <div>
       <h1>Home Page</h1>
       <h2>Dogs waiting for adoption.</h2>
+
+      <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
 
       <form onSubmit={handleSearchSubmit}>
         <input
@@ -104,5 +108,3 @@ console.log(search);
 
 
 export default HomePage;
-
-

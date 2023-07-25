@@ -41,7 +41,7 @@ const handleGptSubmit = (e) => {
 
     e.preventDefault();
 
-   
+
     const requestLogInBody = {
       "breed": breed,
       "active": active,
@@ -71,9 +71,9 @@ const handleGptSubmit = (e) => {
         .catch((error) => {
       console.error("Error while making the POST request:", error);
            });
-      
+
     }
-  
+
 
     }
 

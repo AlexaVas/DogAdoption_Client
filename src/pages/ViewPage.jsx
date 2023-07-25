@@ -10,8 +10,8 @@ import Gpt from "../components/Gpt";
 const API_URL = "http://localhost:5008";
 
 function ViewPage() {
-  const { user } = useContext(AuthContext); 
-  
+  const { user } = useContext(AuthContext);
+
   console.log(user.userType);
   const [dog, setDog] = useState();
 
@@ -39,7 +39,7 @@ const navigate = useNavigate();
 
   const handleFavorites = () => {
 
-    
+
 
      const storedToken = localStorage.getItem("authToken");
      console.log(storedToken);
@@ -50,7 +50,7 @@ const navigate = useNavigate();
        })
        .then((response) => {
          const selectedDog = response.data;
-         console.log(selectedDog);  
+         console.log(selectedDog);
        })
        .then(() => navigate("/"))
        .catch((error) => console.log(error));
@@ -84,13 +84,13 @@ const navigate = useNavigate();
                 {dog.user.length} people are already interested in {dog.name} !
                 Get in touch with {dog.shelterName} to not miss your chance!
               </p>
-                
+
               </div>
             ) : (
               <p></p>
             )}
           </article>
-          
+
                 <div>
                     <Gpt breed={dog.breed} name={dog.name}></Gpt>
                 </div>
@@ -102,7 +102,7 @@ const navigate = useNavigate();
         <h1>Lodaing...</h1>
       )}
 
-      
+
     </div>
   );
 }
