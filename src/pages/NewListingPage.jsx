@@ -8,148 +8,197 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:5008";
 
-function NewListing (props) {
+function NewListing(props) {
+  const { user } = useContext(AuthContext);
 
-const { user } = useContext(AuthContext);
-
-
-
-
-
- const [name, setName] = useState("");
- const [breed, setBreed] = useState("");
- const [age, setAge] = useState("");
- const [phone, setPhone] = useState("");
- const [image, setImage] = useState("");
- const [description, setDescription] = useState("");
-const [profileId, setProfileId] = useState("");
-const [shelterName, setShelterName] = useState("");
-const [shelterLocation, setShelterLocation] = useState("");
+  const [name, setName] = useState("");
+  const [breed, setBreed] = useState("");
+  const [age, setAge] = useState("");
+  const [phone, setPhone] = useState("");
+  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [profileId, setProfileId] = useState("");
+  const [shelterName, setShelterName] = useState("");
+  const [shelterLocation, setShelterLocation] = useState("");
 
   useEffect(() => {
-
     setProfileId(user._id);
     setShelterName(user.name);
     setShelterLocation(user.location);
-
   }, [name]);
 
-    console.log(user.location);
+  console.log(user.location);
 
- const [errorMessage, setErrorMessage] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
- const handleName = (e) => setName(e.target.value);
- const handleBreed = (e) => setBreed(e.target.value);
- const handleAge = (e) => setAge(e.target.value);
- const handlePhone = (e) => setPhone(e.target.value);
- const handleImage = (e) => {
+  const handleName = (e) => setName(e.target.value);
+  const handleBreed = (e) => setBreed(e.target.value);
+  const handleAge = (e) => setAge(e.target.value);
+  const handlePhone = (e) => setPhone(e.target.value);
+  const handleImage = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-        console.log(image)
+        console.log(image);
       };
       reader.readAsDataURL(file);
     }
   };
 
- const handleDescription = (e) => setDescription(e.target.value);
+  const handleDescription = (e) => setDescription(e.target.value);
 
- const handleDogSubmit = (e) => {
-   e.preventDefault();
-   // Create an object representing the request body
-   const requestBody = {name, breed, age, phone, image, description, profileId, shelterName, shelterLocation};
+  const handleDogSubmit = (e) => {
+    e.preventDefault();
+    // Create an object representing the request body
+    const requestBody = {
+      name,
+      breed,
+      age,
+      phone,
+      image,
+      description,
+      profileId,
+      shelterName,
+      shelterLocation,
+    };
 
-   // Make an axios request to the API
-   // If the POST request is a successful redirect to the login page
-   // If the request resolves with an error, set the error message in the state
-   axios
-     .post(`${API_URL}/shelter/profile`, requestBody)
-     .then((response) => {
+    // Make an axios request to the API
+    // If the POST request is a successful redirect to the login page
+    // If the request resolves with an error, set the error message in the state
+    axios
+      .post(`${API_URL}/shelter/profile`, requestBody)
+      .then((response) => {
         console.log(response);
-       
-     })
-     .catch((error) => {
-       const errorDescription = error.response.data.message;
-       setErrorMessage(errorDescription);
-     });
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
 
-     setName("");
-     setBreed("");
-     setAge("");
-     setPhone("");
-     setImage("");
-     setDescription("");
-     setProfileId("");
- };
-  
+    setName("");
+    setBreed("");
+    setAge("");
+    setPhone("");
+    setImage("");
+    setDescription("");
+    setProfileId("");
+  };
+
   console.log(image);
 
-return (
-  <div>
-    
+  return (
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Add a new listing
+        </h2>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" onSubmit={handleDogSubmit}>
+            <div>
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Name
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Alfie"
+                  value={name}
+                  onChange={handleName}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Breed
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="breed"
+                  placeholder="English Bulldog"
+                  value={breed}
+                  onChange={handleBreed}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Age
+              </label>
+              <div className="mt-2">
+                <input
+                  type="Number"
+                  name="age"
+                  placeholder="5"
+                  value={age}
+                  onChange={handleAge}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <div className="mt-2">
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                  Phone
+                </label>
+                <input
+                  type="phone"
+                  name="phone"
+                  placeholder="+44 3460 97343"
+                  value={phone}
+                  onChange={handlePhone}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <div className="mt-2">
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                  Image
+                </label>
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImage}
+                  className="block"
+                />
+              </div>
+            </div>
+            <div>
+              <div className="mt-2">
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Good Boy!"
+                  value={description}
+                  onChange={handleDescription}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
 
-    <h2>Add a new listing:</h2>
-
-    <form onSubmit={handleDogSubmit}>
-      <label>Name:</label>
-      <input
-        type="text"
-        name="name"
-        placeholder="Alfie"
-        value={name}
-        onChange={handleName}
-      />
-      <label>Breed:</label>
-      <input
-        type="text"
-        name="breed"
-        placeholder="English Bulldog"
-        value={breed}
-        onChange={handleBreed}
-      />
-      <label>Age:</label>
-      <input
-        type="Number"
-        name="age"
-        placeholder="5"
-        value={age}
-        onChange={handleAge}
-      />
-      <label>Phone:</label>
-      <input
-        type="phone"
-        name="phone"
-        placeholder="+44 3460 97343"
-        value={phone}
-        onChange={handlePhone}
-      />
-      <label>Image:</label>
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={handleImage}
-      />
-      <label>Description:</label>
-      <input
-        type="text"
-        name="description"
-        placeholder="Good Boy!"
-        value={description}
-        onChange={handleDescription}
-      />
-
-      <button type="submit">Create</button>
-    </form>
-  </div>
-);
-
-
+            <button
+              className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              type="submit"
+            >
+              Add Listing
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
-
 
 export default NewListing;

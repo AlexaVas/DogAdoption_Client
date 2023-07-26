@@ -27,7 +27,6 @@ function Gpt(props) {
   };
 
   const handleGptSubmit = (e) => {
-    setIsLoading(true);
     e.preventDefault();
     const requestLogInBody = {
       breed: breed,
@@ -37,6 +36,7 @@ function Gpt(props) {
     };
 
     if (apartment !== "" || exp !== "" || active !== "") {
+      setIsLoading(true);
       axios
         .post(`${API_URL}/gpt/`, requestLogInBody)
         .then((response) => {

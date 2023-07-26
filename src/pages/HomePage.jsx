@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// import { AuthContext } from "../context/auth.context";
 
 const API_URL = "http://localhost:5008";
 
 function HomePage() {
   // Define the LoadingSpinner component
+  // const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
+
   const LoadingSpinner = () => (
     <div className="spinner">
       <div className="dot1"></div>
