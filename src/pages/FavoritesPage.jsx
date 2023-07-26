@@ -8,11 +8,8 @@ import { AuthContext } from "../context/auth.context";
 const API_URL = "http://localhost:5008";
 
 function FavoritesPage() {
-
-
   const [myDogs, setMyDogs] = useState();
 
-  
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     console.log(storedToken);
@@ -28,58 +25,74 @@ function FavoritesPage() {
       .catch((error) => console.log(error));
   }, []);
 
-  
-///////////////////////////////Remove/////////////////////////////////
-const navigate = useNavigate();
+  ///////////////////////////////Remove/////////////////////////////////
+  const navigate = useNavigate();
 
   const handleRemove = (idToRemove) => {
-     const storedToken = localStorage.getItem("authToken");
+    const storedToken = localStorage.getItem("authToken");
 
-     axios
+    axios
       .delete(`${API_URL}/user/profile/${idToRemove}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
         setMyDogs((prevMyDogs) =>
-          prevMyDogs.filter((dog) => dog._id !== idToRemove))
-        
+          prevMyDogs.filter((dog) => dog._id !== idToRemove)
+        );
       })
       .catch((error) => console.log(error));
 
-console.log(idToRemove);
-
+    console.log(idToRemove);
   };
 
-    
+  /////////////////////////////////////////////////////////////////////
 
-
-  
-/////////////////////////////////////////////////////////////////////
-
- 
   return (
-    <div>
-      {myDogs ? (
-        myDogs.map((profile) => (
-          <div>
-            <article key={profile._id}>
-              <h3>Name: {profile.name}</h3>
-              <p>Breed: {profile.breed}</p>
-              <img src={profile.image}></img>
-              <span>
-                <p>Located at</p> <h3>{profile.shelterName}</h3>
-              </span>
+    <div className="relative isolate pt-14">
+      <div className="mx-auto max-w-7xl px-6 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
+        <ul role="list" className="divide-y divide-gray-100 w-full">
+        <h1 className="text-lg font-semibold leading-6 text-gray-900 mb-8">My Favorites</h1>
+          {myDogs ? (
+            myDogs.map((profile) => (
+              <div>
+                <li
+                  key={profile._id}
+                  className="relative flex justify-between py-5"
+                >
+                  <div className="flex gap-x-4 pr-6 sm:w-1/2 sm:flex-none">
+                    <img
+                      className="h-12 w-12 flex-none rounded-full bg-gray-50 my-4"
+                      src={profile.image}
+                    ></img>
+                    <div className="min-w-0 flex-auto my-4">
+                      <p className="text-sm font-semibold leading-6 text-gray-900">
+                        {profile.name}
+                      </p>
+                      <p className="flex-none text-xs text-gray-600">
+                        {profile.breed}
+                      </p>
 
-              <p>Call or text +{profile.phone} to meet {profile.name}. </p>
-            </article>
-            
-              <button onClick={() => handleRemove(profile._id)}>Remove from Favorites</button>
-           
-          </div>
-        ))
-      ) : (
-        <h1>Lodaing...</h1>
-      )}
+                    </div>
+                    <div className="my-4">
+                    <h3 className="text-sm font-semibold leading-6 text-gray-900">{profile.shelterName}</h3>
+                      <p className="flex-none text-xs text-gray-600">+{profile.phone}</p>
+                      </div>
+                  </div>
+
+                  <button
+                    className="my-4 py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 text-sm font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded"
+                    onClick={() => handleRemove(profile._id)}
+                  >
+                    Remove from Favorites
+                  </button>
+                </li>
+              </div>
+            ))
+          ) : (
+            <h1>Loading...</h1>
+          )}
+        </ul>
+      </div>
     </div>
   );
 }

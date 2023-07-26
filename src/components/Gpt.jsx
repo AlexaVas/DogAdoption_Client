@@ -67,22 +67,22 @@ function Gpt(props) {
       {/* Hide the heading and form when text is generated */}
       {!textGenerated && (
         <>
-          <h3 className="mt-2 text-xl font-bold tracking-tight text-gray-900 sm:text-xl">Find out if {name} is a good fit for you!</h3>
+          <h3 className="mt-2 text-lg font-bold tracking-tight text-gray-900 sm:text-xl">Find out if {name} is a good fit for you!</h3>
 
-          <form className="mt-2 space-y-4">
-            <label className="block text-sm font-medium leading-6 text-gray-900">What type of place do you have?</label>
+          <form className="mt-8 space-y-4">
+            <label className="block text-sm font-medium leading-6 text-gray-700">What type of place do you have?</label>
             <select className="rounded-md w-full" value={apartment} onChange={handleLivingSituationChange}>
               <option></option>
               <option value="apartment">Apartment</option>
               <option value="house with garden">House with garden</option>
             </select>
-            <label className="block text-sm font-medium leading-6 text-gray-900">How active are you?</label>
+            <label className="block text-sm font-medium leading-6 text-gray-700">How active are you?</label>
             <select className="rounded-md w-full" value={active} onChange={handleActivityLevelChange}>
               <option></option>
               <option value="active">Active</option>
               <option value="Not active">Not Active</option>
             </select>
-            <label className="block text-sm font-medium leading-6 text-gray-900">What's your experience level with dogs?</label>
+            <label className="block text-sm font-medium leading-6 text-gray-700">What's your experience level with dogs?</label>
             <select className="rounded-md w-full" value={exp} onChange={handleDogExperienceChange}>
               <option></option>
               <option value="not experienced">First time dog owner</option>
