@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Lottie from "lottie-react";
 import animationData from "/src/assets/animation_lkjpco1p.json";
-const API_URL = "http://localhost:5008";
+const API_URL = "https://clear-bee-dress.cyclic.app";
 
 function Gpt(props) {
   const breed = props.breed;
