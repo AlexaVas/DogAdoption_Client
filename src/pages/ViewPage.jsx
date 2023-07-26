@@ -80,7 +80,7 @@ function ViewPage() {
               </h4>
               <p className="text-gray-600">{dog.description}</p>
               <h4 className="text-sm font-semibold leading-8 text-gray-800 pt-5">
-                How to adopt
+                Contact
               </h4>
               <p className="pb-2 text-gray-600">
                 {dog.shelterName}

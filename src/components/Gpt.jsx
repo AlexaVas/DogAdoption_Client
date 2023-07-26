@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import Lottie from "lottie-react";
+import animationData from "/src/assets/animation_lkjpco1p.json";
 const API_URL = "http://localhost:5008";
 
 function Gpt(props) {
@@ -56,7 +58,7 @@ function Gpt(props) {
     }
   };
 
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading) return <div><Lottie animationData={animationData} style={{ width: 200, height: 200 }} /></div>;
 
   return (
     <div>
