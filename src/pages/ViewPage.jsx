@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-// import Gpt from "../components/Gpt";
+import Gpt from "../components/Gpt";
 
 const API_URL = "http://localhost:5008";
 
@@ -102,15 +102,15 @@ function ViewPage() {
                 </button>
               ) : null}
             </div>
+            <div className="mt-10">
+
+<Gpt breed={dog.breed} name={dog.name}></Gpt>
+
+</div>
           </div>
         ) : (
           <h1>Loading...</h1>
         )}
-        <div className="mt-10">
-          <div>
-            {/* <Gpt breed={dog.breed} name={dog.name}></Gpt> */}
-          </div>
-        </div>
       </div>
     </div>
   );

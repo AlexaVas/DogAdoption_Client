@@ -1,122 +1,86 @@
 import { useState } from "react";
 import axios from "axios";
-
 const API_URL = "http://localhost:5008";
-
-const Gpt = ({ breed, name }) => {
-  const [state, setState] = useState({
-    apartment: "",
-    active: "",
-    exp: "",
-    advice: "",
-  });
-
-  const handleChange = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.value,
-    });
+function Gpt(props) {
+  const breed = props.breed;
+  const name = props.name;
+  const [apartment, setApartment] = useState("");
+  const [active, setActive] = useState("");
+  const [exp, setExp] = useState("");
+  const [advice, setAdvice] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(apartment, active, exp);
+  const handleLivingSituationChange = (event) => {
+    setApartment(event.target.value);
   };
-
-  const handleGptSubmit = (event) => {
-    event.preventDefault();
-
-    const { apartment, active, exp } = state;
-
-    if (apartment || exp || active) {
-      const requestLogInBody = {
-        breed,
-        active,
-        apartment,
-        exp,
-      };
-
+  const handleActivityLevelChange = (event) => {
+    setActive(event.target.value);
+  };
+  const handleDogExperienceChange = (event) => {
+    setExp(event.target.value);
+  };
+  const handleGptSubmit = (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    const requestLogInBody = {
+      breed: breed,
+      active: active,
+      apartment: apartment,
+      exp: exp,
+    };
+    if (apartment !== "" || exp !== "" || active !== "") {
       axios
         .post(`${API_URL}/gpt/`, requestLogInBody)
         .then((response) => {
           const advice = response.data.text;
-          setState((prevState) => ({
-            ...prevState,
-            advice,
-            apartment: "",
-            active: "",
-            exp: "",
-          }));
+          setAdvice(advice);
+          console.log(advice);
+        })
+        .then(() => {
+          setApartment("");
+          setActive("");
+          setExp("");
+          setIsLoading(false);
         })
         .catch((error) => {
+          setIsLoading(false);
           console.error("Error while making the POST request:", error);
-        });
+        })
     }
   };
-  
+  console.log(advice);
+  if(isLoading) return <div>loading...</div>;
   return (
     <div>
-      <p className="text-base font-semibold leading-7 text-blue-600">AI Bud</p>
-      <h1 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-        Find out if {name} is a good fit for you:
-      </h1>
-      <form className="mt-2 space-y-4">
-        <div>
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            What type of place do you have?
-          </label>
-          <select
-            className="rounded-md"
-            name="apartment"
-            value={state.apartment}
-            onChange={handleChange}
-          >
-            <option></option>
-            <option value="apartment">Apartment</option>
-            <option value="house with garden">House with backyard</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Are you active?
-          </label>
-          <select
-            className="rounded-md"
-            name="active"
-            value={state.active}
-            onChange={handleChange}
-          >
-            <option></option>
-            <option value="active">Active</option>
-            <option value="Not active">Not Active</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Have you had a dog before?
-          </label>
-          <select
-            className="rounded-md"
-            name="exp"
-            value={state.exp}
-            onChange={handleChange}
-          >
-            <option></option>
-            <option value="not experienced">First time dog owner</option>
-            <option value="experienced">Experienced dog owner</option>
-          </select>
-        </div>
+      <h3>Check if your lifestyle matches {name}´s needs!</h3>
+      <form>
+        <label>You live at </label>
+        <select value={apartment} onChange={handleLivingSituationChange}>
+          <option></option>
+          <option value="apartment">Apartment</option>
+          <option value="house with garden">House with garden</option>
+        </select>
+        <label>You are </label>
+        <select value={active} onChange={handleActivityLevelChange}>
+          <option></option>
+          <option value="active">Active</option>
+          <option value="Not active">Not Active</option>
+        </select>
+        <label>You are</label>
+        <select value={exp} onChange={handleDogExperienceChange}>
+          <option></option>
+          <option value="not experienced">First time dog owner</option>
+          <option value="experienced">Experienced dog owner</option>
+        </select>
       </form>
-      <button
-        onClick={handleGptSubmit}
-        className="py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded"
-      >
-        Check
-      </button>
-
-      {state.advice && (
+      <button onClick={handleGptSubmit}>Check</button>
+      {advice && (
         <div>
-          <h3>Your Result:</h3>
-          <div className="mt-10 gap-8 text-base leading-7 text-gray-700">
-            <p>{state.advice}</p>
-          </div>
+          <h3>Your Answers</h3>
+          <p>{advice}</p>
         </div>
       )}
     </div>
   );
 }
+export default Gpt;
