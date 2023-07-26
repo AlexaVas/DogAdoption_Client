@@ -67,7 +67,7 @@ function ViewPage() {
                 alt={dog.name}
               />
             </div>
-            <div className="mt-6 lg:mt-0 lg:w-1/2 lg:pl-8">
+            <div className="py-4 px-6 lg:mt-0 lg:w-1/2 lg:pl-8">
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 {dog.name}
               </h1>
@@ -75,20 +75,21 @@ function ViewPage() {
                 Breed: {dog.breed}
               </h2>
               <p className="text-md block text-gray-600">Age: {dog.age}</p>
-              <h4 className="text-lg font-semibold leading-8 text-gray-800 pt-5">
+              <h4 className="text-sm font-semibold leading-8 text-gray-800 pt-5">
                 Description
               </h4>
               <p className="text-gray-600">{dog.description}</p>
-              <h4 className="text-lg font-semibold leading-8 text-gray-800 pt-5">
+              <h4 className="text-sm font-semibold leading-8 text-gray-800 pt-5">
                 How to adopt
               </h4>
-              <p className="pb-5 text-gray-600">
-                {dog.name} is currently based at {dog.shelterName}. Call or text
-                +{dog.phone} to get an appointment and meet {dog.name} in
-                person!
+              <p className="pb-2 text-gray-600">
+                {dog.shelterName}
+                </p>
+                <p className="text-sm text-gray-600">
+                +{dog.phone}
               </p>
               {dog.user.length > 1 ? (
-                <p>
+                <p className="my-4 text-sm text-blue-600">
                   {dog.user.length} people are already interested in {dog.name}!
                   Get in touch with {dog.shelterName} to not miss your chance!
                 </p>
@@ -102,16 +103,19 @@ function ViewPage() {
                 </button>
               ) : null}
             </div>
-            <div className="mt-10">
+            <div className="p-6 rounded-md bg-gray-100 lg:max-w-[320px] sm:w-full">
 
 <Gpt breed={dog.breed} name={dog.name}></Gpt>
 
 </div>
+
           </div>
         ) : (
           <h1>Loading...</h1>
         )}
+
       </div>
+
     </div>
   );
 }
