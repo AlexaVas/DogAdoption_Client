@@ -117,20 +117,17 @@ function ShelterProfile() {
 
       <div className="mx-auto max-w-7xl px-6 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
         <ul className="divide-y divide-gray-100 w-full">
-          <h1 className="my-8 px-4 text-lg font-semibold text-gray-900">
-            Your Listings:
-          </h1>
 
           {myDogs ? (
             myDogs.map((dog) => (
-              <div>
+              <div className="px-8">
                 <li
                   key={dog._id}
                   className="relative flex justify-between py-5"
                 >
                   <div className="flex gap-x-4 pr-6 sm:w-1/2 sm:flex-none">
                     <img
-                      lassName="h-16 w-16 flex-none rounded-full bg-gray-50 my-2 object-cover"
+                      className="h-16 w-16 flex-none rounded-full bg-gray-50 my-2 object-cover"
                       src={dog.image}
                     ></img>
                     <div className="min-w-0 flex-auto my-4">
@@ -141,9 +138,9 @@ function ShelterProfile() {
                         {dog.breed}
                       </p>
                     </div>
-                    <div>
-                      <p className="text-sm font-semibold leading-6 text-gray-900">
-                        {dog.age}
+                    <div className="my-4">
+                      <p className="text-sm font-medium leading-6 text-gray-900">
+                        {dog.age} years old
                       </p>
 
                       <p className="flex-none text-xs text-gray-600">
@@ -151,15 +148,19 @@ function ShelterProfile() {
                       </p>
                     </div>
                   </div>
-                </li>
-
-                <Link to={`/profile/edit/${dog._id}`}>
+                  <div className="space-x-4">
+                  <Link to={`/profile/edit/${dog._id}`}>
                   <button className="my-4 py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 text-sm font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded">
                     Edit
                   </button>
                 </Link>
 
-                <button onClick={() => handleDelete(dog._id)}>Delete</button>
+                <button className="my-4 py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 text-sm font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded"
+ onClick={() => handleDelete(dog._id)}>Delete</button>
+ </div>
+                </li>
+
+
               </div>
             ))
           ) : (
