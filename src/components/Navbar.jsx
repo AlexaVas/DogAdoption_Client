@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
-import { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react';
+import fullLogo from "/src/assets/fullLogo.svg";
 import { Dialog, Popover, Transition } from '@headlessui/react'
 import {
   ArrowPathIcon,
@@ -28,9 +29,10 @@ function Navbar() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex">
             <Link to="/">
-
-                <img className="h-8 w-auto" src="/src/assets/fullLogo.svg" alt="" />
-
+              <a className="-m-1.5 p-1.5">
+                <span className="sr-only">Barkly</span>
+                <fullLogo />
+              </a>
             </Link>
           </div>
 
@@ -63,10 +65,10 @@ function Navbar() {
                         <item.icon className="h-6 w-6 text-gray-600 group-hover:text-blue-600" aria-hidden="true" />
                       </div>
                       <div className="flex-auto">
-                        <Link to={item.href} className="block font-semibold text-gray-900">
+                        <a href={item.href} className="block font-semibold text-gray-900">
                           {item.name}
                           <span className="absolute inset-0" />
-                        </Link>
+                        </a>
                         <p className="mt-1 text-gray-600">{item.description}</p>
                       </div>
                     </div>
