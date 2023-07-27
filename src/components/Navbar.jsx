@@ -31,7 +31,7 @@ function Navbar() {
           aria-label="Global">
           <div className="flex">
             <Link to="/">
-  
+
                 <span className="sr-only">Barkly</span>
                 <img className="h-8 w-auto" src={fullLogo} alt="" />
 
@@ -70,7 +70,7 @@ function Navbar() {
                             />
                           </div>
                           <div className="flex-auto">
-                          
+
                               <Link to={item.href}
                               className="block font-semibold text-gray-900">
                               {item.name}
@@ -126,6 +126,7 @@ function Navbar() {
 
 <div className="flex items-center">
 <HomeIcon className="h-5 w-5 text-gray-600 mx-4"  />
+<p className="mx-4">{user && user.name}</p>
 <button className="text-sm font-semibold leading-6 text-gray-900" onClick={logOutUser}>Logout</button>
 </div>
           </>
@@ -172,6 +173,7 @@ function Navbar() {
 
             <div className="flex items-center">
             <UserIcon className="h-5 w-5 text-gray-600 mx-4"  />
+            <p className="mx-4">{user && user.name}</p>
 <button className="text-sm font-semibold leading-6 text-gray-900" onClick={logOutUser}>Logout</button>
 </div>
 
