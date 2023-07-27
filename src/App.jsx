@@ -1,7 +1,7 @@
 /** @format */
 
 import "./App.css";
-import { Routes, Route } from "react-router-dom"; // <== IMPORT
+import { Routes, Route, Redirect } from "react-router-dom"; // <== IMPORT
 // import ProjectListPage from "./pages/ProjectListPage"; 
 // import ProjectDetailsPage from "./pages/ProjectDetailsPage";    
 // import EditProjectPage from "./pages/EditProjectPage";   
@@ -104,6 +104,9 @@ function App() {
             </IsPrivate>
           }
         />
+        <Route path="*">
+          <Redirect to="/home" />
+        </Route>
       </Routes>
     </div>
   );
