@@ -126,7 +126,7 @@ function Navbar() {
 
 <div className="flex items-center">
 <HomeIcon className="h-5 w-5 text-gray-600 mr-4"  />
-<p className="mr-4 text-gray-600 text-sm font-light">{user && user.name}</p>
+<p className="mr-4 text-gray-800 text-sm font-medium">{user && user.name}</p>
 <button className="text-sm font-semibold leading-6 text-gray-900" onClick={logOutUser}>Logout</button>
 </div>
           </>
@@ -173,7 +173,7 @@ function Navbar() {
 
             <div className="flex items-center">
             <UserIcon className="h-5 w-5 text-gray-600 mr-4"  />
-            <p className="mr-4 text-gray-600 text-sm font-light">{user && user.name}</p>
+            <p className="mr-4 text-gray-800 text-sm font-medium">{user && user.name}</p>
 <button className="text-sm font-semibold leading-6 text-gray-900" onClick={logOutUser}>Logout</button>
 </div>
 
