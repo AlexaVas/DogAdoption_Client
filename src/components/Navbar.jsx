@@ -31,10 +31,10 @@ function Navbar() {
           aria-label="Global">
           <div className="flex">
             <Link to="/">
-             
+  
                 <span className="sr-only">Barkly</span>
-                <img className="m-1.5 p-1.5 h-8 w-auto" src={fullLogo} alt="" />
-      
+                <img className="h-8 w-auto" src={fullLogo} alt="" />
+
             </Link>
           </div>
 
