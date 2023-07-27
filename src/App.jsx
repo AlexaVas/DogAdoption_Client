@@ -2,9 +2,9 @@
 
 import "./App.css";
 import { Routes, Route} from "react-router-dom"; // <== IMPORT
-// import ProjectListPage from "./pages/ProjectListPage"; 
-// import ProjectDetailsPage from "./pages/ProjectDetailsPage";    
-// import EditProjectPage from "./pages/EditProjectPage";   
+// import ProjectListPage from "./pages/ProjectListPage";
+// import ProjectDetailsPage from "./pages/ProjectDetailsPage";
+// import EditProjectPage from "./pages/EditProjectPage";
 import Navbar from "./components/Navbar"; // <== IMPORT
 import HomePage from "./pages/HomePage"; // <== IMPORT
 import SignupPage from "./pages/SignupPage";
@@ -17,6 +17,7 @@ import ShelterProfile from "./pages/ShelterProfile";
 import EditDogPage from "./pages/EditDogPage";
 import ViewPage from "./pages/ViewPage";
 import FavoritesPage from "./pages/FavoritesPage";
+import MissionPage from "./pages/MissionPage";
 
 function App() {
   return (
@@ -104,7 +105,17 @@ function App() {
             </IsPrivate>
           }
         />
-        
+
+        <Route
+          path="/mission"
+          element={
+            <IsAnon>
+              {" "}
+              <MissionPage />{" "}
+            </IsAnon>
+          }
+        />
+
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>
