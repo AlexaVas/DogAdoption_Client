@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import logo from "/src/assets/logo.svg";
+
 
 const API_URL = "https://clear-bee-dress.cyclic.app";
 
@@ -43,7 +45,7 @@ function SignupPage(props) {
         <div>
           <img
             className="mx-auto h-10 w-auto"
-            src="src/assets/logo.svg"
+            src={logo}
             alt="Barkly"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -126,7 +128,7 @@ function SignupPage(props) {
 
         <p className="mt-10 text-center text-sm text-gray-500">
             Already have an account?{' '}
-            <Link className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" to={"/login"}> Login</Link>
+            <Link className="font-semibold leading-6 text-blue-600 hover:text-blue-500" to={"/login"}> Login</Link>
           </p>
       </div>
     </div>
