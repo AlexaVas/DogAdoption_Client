@@ -38,7 +38,7 @@ function Navbar() {
             </Link>
           </div>
 
-          <div className="flex  gap-x-8">
+          <div className="flex gap-x-8">
 
 
 <Link to="/mission"> <button className="text-sm font-semibold leading-6 text-gray-900">
@@ -114,7 +114,7 @@ function Navbar() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex">
             <Link to="/">
-              <a className="-m-1.5 p-1.5">
+              <a>
                 <span className="sr-only">Barkly</span>
                 <img className="h-8 w-auto" src={fullLogo} alt="" />
               </a>
@@ -172,7 +172,7 @@ function Navbar() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex">
             <Link to="/">
-              <a className="-m-1.5 p-1.5">
+              <a>
                 <span className="sr-only">Barkly</span>
                 <img className="h-8 w-auto" src={fullLogo} alt="" />
               </a>
