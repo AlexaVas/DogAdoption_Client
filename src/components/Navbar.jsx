@@ -101,7 +101,7 @@ function Navbar() {
             <Link to="/">
               <a className="-m-1.5 p-1.5">
                 <span className="sr-only">Barkly</span>
-                <img className="h-8 w-auto" src="src/assets/fullLogo.svg" alt="" />
+                <img className="h-8 w-auto" src={fullLogo} alt="" />
               </a>
             </Link>
           </div>
@@ -158,7 +158,7 @@ function Navbar() {
             <Link to="/">
               <a className="-m-1.5 p-1.5">
                 <span className="sr-only">Barkly</span>
-                <img className="h-8 w-auto" src="/src/assets/fullLogo.svg" alt="" />
+                <img className="h-8 w-auto" src={fullLogo} alt="" />
               </a>
             </Link>
           </div>
