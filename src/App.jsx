@@ -104,9 +104,8 @@ function App() {
             </IsPrivate>
           }
         />
-        <Route path="*" element={<HomePage/>}>
-          
-        </Route>
+        
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </div>
   );
