@@ -46,9 +46,9 @@ function Navbar() {
   </button>
 </Link>
 
-{/* <Link to="/shelter/listing"><button className="text-sm font-semibold leading-6 text-gray-900">
-  Add Listing</button>
-</Link> */}
+<Link to="/learning"><button className="text-sm font-semibold leading-6 text-gray-900">
+  Learning Center</button>
+</Link>
 
 
 </div>

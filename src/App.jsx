@@ -18,6 +18,7 @@ import EditDogPage from "./pages/EditDogPage";
 import ViewPage from "./pages/ViewPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import MissionPage from "./pages/MissionPage";
+import LearningCenter from "./pages/LearningCenter";
 
 function App() {
   return (
@@ -112,6 +113,16 @@ function App() {
             <IsAnon>
               {" "}
               <MissionPage />{" "}
+            </IsAnon>
+          }
+        />
+
+<Route
+          path="/learning"
+          element={
+            <IsAnon>
+              {" "}
+              <LearningCenter />{" "}
             </IsAnon>
           }
         />
