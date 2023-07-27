@@ -70,12 +70,12 @@ function Navbar() {
                             />
                           </div>
                           <div className="flex-auto">
-                            <a
-                              href={item.href}
+                          
+                              <Link to={item.href}
                               className="block font-semibold text-gray-900">
                               {item.name}
                               <span className="absolute inset-0" />
-                            </a>
+                            </Link>
                             <p className="mt-1 text-gray-600">
                               {item.description}
                             </p>
