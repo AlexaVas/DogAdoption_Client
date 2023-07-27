@@ -38,6 +38,21 @@ function Navbar() {
             </Link>
           </div>
 
+          <div className="flex  gap-x-8">
+
+
+<Link to="/mission"> <button className="text-sm font-semibold leading-6 text-gray-900">
+  Our Mission
+  </button>
+</Link>
+
+{/* <Link to="/shelter/listing"><button className="text-sm font-semibold leading-6 text-gray-900">
+  Add Listing</button>
+</Link> */}
+
+
+</div>
+
           {!isLoggedIn && (
             <>
               <Popover className="relative">
