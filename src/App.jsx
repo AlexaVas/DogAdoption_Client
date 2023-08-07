@@ -19,8 +19,7 @@ import ViewPage from "./pages/ViewPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import MissionPage from "./pages/MissionPage";
 import LearningCenter from "./pages/LearningCenter";
-import MissionPage from "./pages/MissionPage";
-import LearningCenter from "./pages/LearningCenter";
+
 
 function App() {
   return (
