@@ -7,7 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Alert } from "@material-tailwind/react";
 
-const API_URL = "http://localhost:5008";
+const API_URL = "https://clear-bee-dress.cyclic.app/";
 
 function NewListing(props) {
   const { user } = useContext(AuthContext);

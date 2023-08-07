@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 // import { AuthContext } from "../context/auth.context";
 
-const API_URL = "http://localhost:5008";
+const API_URL = "https://clear-bee-dress.cyclic.app/";
 
 function HomePage() {
   // Define the LoadingSpinner component
