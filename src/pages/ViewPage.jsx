@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Gpt from "../components/Gpt";
-import Gallery from "../components/gallery";
+import Gallery from "../components/Gallery";
 
 const API_URL = "http://localhost:5008";
 
