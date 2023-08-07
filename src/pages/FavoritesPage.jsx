@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-const API_URL = "https://clear-bee-dress.cyclic.app";
+const API_URL = "http://localhost:5008";
 
 function FavoritesPage() {
   const [myDogs, setMyDogs] = useState();
@@ -62,7 +62,7 @@ function FavoritesPage() {
                   <div className="flex gap-x-4 pr-6 sm:w-1/2 sm:flex-none">
                     <img
                       className="h-16 w-16 flex-none rounded-full bg-gray-50 my-2 object-cover"
-                      src={profile.image}
+                      src={profile.image[0]}
                     ></img>
                     <div className="min-w-0 flex-auto my-4">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
@@ -75,7 +75,7 @@ function FavoritesPage() {
                     </div>
                     <div className="my-4">
                     <h3 className="text-sm font-semibold leading-6 text-gray-900">{profile.shelterName}</h3>
-                      <p className="flex-none text-xs text-gray-600">+{profile.phone}</p>
+                      <p className="flex-none text-xs text-gray-600">{profile.phone}</p>
                       </div>
                   </div>
 

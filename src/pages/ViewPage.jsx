@@ -5,8 +5,9 @@ import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Gpt from "../components/Gpt";
+import Gallery from "../components/gallery";
 
-const API_URL = "https://clear-bee-dress.cyclic.app";
+const API_URL = "http://localhost:5008";
 
 function ViewPage() {
   const { user } = useContext(AuthContext);
@@ -57,16 +58,12 @@ function ViewPage() {
 
   return (
     <div className="relative isolate">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-4 lg:py-15">
         {dog ? (
           <div className="flex flex-col lg:flex-row">
-            <div className="aspect-w-4 aspect-h-2 w-full lg:w-1/2">
-              <img
-                className="object-cover rounded-lg"
-                src={dog.image}
-                alt={dog.name}
-              />
-            </div>
+            
+              <Gallery slides={dog.image}></Gallery>
+            
             <div className="py-4 px-6 lg:mt-0 lg:w-1/2 lg:pl-8">
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 {dog.name}
@@ -82,12 +79,8 @@ function ViewPage() {
               <h4 className="text-sm font-semibold leading-8 text-gray-800 pt-5">
                 Contact
               </h4>
-              <p className="pb-2 text-gray-600">
-                {dog.shelterName}
-                </p>
-                <p className="text-sm text-gray-600">
-                +{dog.phone}
-              </p>
+              <p className="pb-2 text-gray-600">{dog.shelterName}</p>
+              <p className="text-sm text-gray-600">{dog.phone}</p>
               {dog.user.length > 1 ? (
                 <p className="my-4 text-sm text-blue-600">
                   {dog.user.length} people are already interested in {dog.name}!
@@ -97,25 +90,19 @@ function ViewPage() {
               {user.userType === "user" ? (
                 <button
                   onClick={handleFavorites}
-                  className="flex mt-8 max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
-                >
+                  className="flex mt-8 max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">
                   Add to favorites
                 </button>
               ) : null}
             </div>
             <div className="p-6 rounded-md bg-gray-100 lg:max-w-[320px] sm:w-full">
-
-<Gpt breed={dog.breed} name={dog.name}></Gpt>
-
-</div>
-
+              <Gpt breed={dog.breed} name={dog.name}></Gpt>
+            </div>
           </div>
         ) : (
           <h1>Loading...</h1>
         )}
-
       </div>
-
     </div>
   );
 }
