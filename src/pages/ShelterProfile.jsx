@@ -6,13 +6,16 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { HomeIcon } from "@heroicons/react/24/outline";
 
-const API_URL = "https://clear-bee-dress.cyclic.app";
+const API_URL = "http://localhost:5008";
 
 function ShelterProfile() {
   const [myDogs, setMyDogs] = useState([]);
 
   const [shelterData, setShelterData] = useState([]);
+  const [locationName, setLocationName] = useState("");
   console.log(shelterData);
+
+   
 
   ///////////////////////////////Delete Dog//////////////////////////////////////
 
@@ -24,7 +27,8 @@ function ShelterProfile() {
       .delete(`${API_URL}/shelter/listings/${idToDelete}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res.data);
         setMyDogs((prevMyDogs) =>
           prevMyDogs.filter((dog) => dog._id !== idToDelete)
         );
@@ -59,27 +63,25 @@ function ShelterProfile() {
     };
 
     getListedDogs();
+
+ 
+
+
   }, []);
 
-  //   useEffect(() => {
-  //     axios
-  //       .delete(`${API_URL}/`)
-  //       .then((response) => {
-  //         const listDogs = response.data;
-  //         setDogs(listDogs);
-  //         console.log(listDogs);
-  //       })
-  //       .catch((error) => console.log(error));
-  //   }, []);
 
-  //   axios
-  //     .put(`${API_URL}/shelter/listings/:dogId`)
-  //     .then((response) => {
-  //       const listDogs = response.data;
-  //       setDogs(listDogs);
-  //       console.log(listDogs);
-  //     })
-  //     .catch((error) => console.log(error));
+  useEffect(()=>{
+
+   const shelterLocation = shelterData.location;
+
+    if (shelterLocation) {
+      const locationName =
+        shelterLocation.slice(0, 1).toUpperCase() + shelterLocation.slice(1);
+      setLocationName(locationName);
+    }
+
+  },[shelterData])
+
 
   return (
     <>
@@ -102,7 +104,7 @@ function ShelterProfile() {
                 </p>
 
                 <p className="text-sm font-regular text-gray-600">
-                  {shelterData.location}
+                  {locationName && locationName}
                 </p>
               </div>
             </div>
@@ -117,19 +119,16 @@ function ShelterProfile() {
 
       <div className="mx-auto max-w-7xl px-6 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
         <ul className="divide-y divide-gray-100 w-full">
-
           {myDogs ? (
             myDogs.map((dog) => (
               <div className="px-8">
                 <li
                   key={dog._id}
-                  className="relative flex justify-between py-5"
-                >
+                  className="relative flex justify-between py-5">
                   <div className="flex gap-x-4 pr-6 sm:w-1/2 sm:flex-none">
                     <img
                       className="h-16 w-16 flex-none rounded-full bg-gray-50 my-2 object-cover"
-                      src={dog.image}
-                    ></img>
+                      src={dog.image[0]}></img>
                     <div className="min-w-0 flex-auto my-4">
                       <h3 className="text-sm font-semibold leading-6 text-gray-900">
                         {dog.name}
@@ -149,18 +148,19 @@ function ShelterProfile() {
                     </div>
                   </div>
                   <div className="space-x-4">
-                  <Link to={`/profile/edit/${dog._id}`}>
-                  <button className="my-4 py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 text-sm font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded">
-                    Edit
-                  </button>
-                </Link>
+                    <Link to={`/profile/edit/${dog._id}`}>
+                      <button className="my-4 py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 text-sm font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded">
+                        Edit
+                      </button>
+                    </Link>
 
-                <button className="my-4 py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 text-sm font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded"
- onClick={() => handleDelete(dog._id)}>Delete</button>
- </div>
+                    <button
+                      className="my-4 py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 text-sm font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded"
+                      onClick={() => handleDelete(dog._id)}>
+                      Delete
+                    </button>
+                  </div>
                 </li>
-
-
               </div>
             ))
           ) : (

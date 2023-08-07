@@ -17,6 +17,8 @@ import ShelterProfile from "./pages/ShelterProfile";
 import EditDogPage from "./pages/EditDogPage";
 import ViewPage from "./pages/ViewPage";
 import FavoritesPage from "./pages/FavoritesPage";
+import MissionPage from "./pages/MissionPage";
+import LearningCenter from "./pages/LearningCenter";
 
 function App() {
   return (
@@ -102,6 +104,33 @@ function App() {
               {" "}
               <FavoritesPage />{" "}
             </IsPrivate>
+          }
+        />
+        <Route
+          path="/learning"
+          element={
+            <IsAnon>
+              {" "}
+              <LearningCenter />{" "}
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/mission"
+          element={
+            <IsAnon>
+              {" "}
+              <MissionPage />{" "}
+            </IsAnon>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <IsAnon>
+              {" "}
+              <HomePage />{" "}
+            </IsAnon>
           }
         />
       </Routes>

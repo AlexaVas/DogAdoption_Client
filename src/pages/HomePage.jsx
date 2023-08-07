@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 // import { AuthContext } from "../context/auth.context";
 
-const API_URL = "https://clear-bee-dress.cyclic.app";
+const API_URL = "http://localhost:5008";
 
 function HomePage() {
   // Define the LoadingSpinner component
@@ -118,7 +118,7 @@ function HomePage() {
     <li className="flex flex-wrap justify-center" key={profile._id}>
       <div className="group w-full overflow-hidden rounded-lg shadow-md">
         <div className="aspect-h-5 aspect-w-6">
-          <img className="pointer-events-none object-cover group-hover:opacity-75" src={profile.image} alt={profile.name} />
+          <img className="pointer-events-none object-cover group-hover:opacity-75" src={profile.image[0]} alt={profile.name} />
         </div>
         <div className="px-4 pb-4">
         <h3 className="pointer-events-none mt-2 block truncate text-lg font-medium text-gray-900">{profile.name}</h3>
