@@ -1,15 +1,22 @@
-import { useState, useEffect } from "react";
+/** @format */
+
+import { useState, useEffect, useContext, createContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import Filter from "../components/Filter";
+import { useFilteredDogsContext } from "../context/filter.context";
+
 // import { AuthContext } from "../context/auth.context";
 
-const API_URL = "https://clear-bee-dress.cyclic.app/";
+const API_URL = "http://localhost:5008";
 
 function HomePage() {
   // Define the LoadingSpinner component
   // const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
+  const { filteredDogs, setFilteredDogs, dogs, setDogs, setFilteredLocation, filteredLocation, isAdult, isPuppy, isSenior, setIsSenior, setIsAdult, setIsPuppy } =
+    useFilteredDogsContext();
 
   const LoadingSpinner = () => (
     <div className="spinner">
@@ -19,9 +26,7 @@ function HomePage() {
   );
 
   const [isLoading, setIsLoading] = useState(true); // Add isLoading state
-  const [dogs, setDogs] = useState([]);
-  const [filteredDogs, setFilteredDogs] = useState([]);
-  console.log(dogs);
+  
 
   useEffect(() => {
     axios
@@ -30,31 +35,83 @@ function HomePage() {
         const listDogs = response.data;
         setDogs(listDogs);
         setFilteredDogs(listDogs);
-        console.log(listDogs);
+        
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false)); // Set isLoading to false when the request is complete
   }, []);
 
   const [search, setSearch] = useState();
+  let filterResult;
+
+ const filter =()=>{
+    if (filteredLocation) {
+
+      const filteredBasedOnLocation = dogs.filter(
+        (dog) => dog.location === filteredLocation
+      );
+      
+      
+      if (isPuppy) {
+        filterResult = filteredBasedOnLocation.filter((dog) => dog.age <= 2);
+        setFilteredDogs(filterResult);
+      } else if (isAdult) {
+        filterResult = filteredBasedOnLocation.filter((dog) => dog.age > 2 && dog.age < 6);
+        setFilteredDogs(filterResult);
+      } else if (isSenior) {
+        filterResult = filteredBasedOnLocation.filter((dog) => dog.age > 6);
+        setFilteredDogs(filterResult);
+      } else {
+
+        setFilteredDogs(filteredBasedOnLocation);
+      }
+    }
+ }
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
 
-    if (!search) {
-      setFilteredDogs(dogs);
-    } else {
-      const searchL = search.toLowerCase();
-      const filteredDogs = dogs.filter((dog) => dog.location === searchL);
-      setFilteredDogs(filteredDogs);
-    }
+    const searchL = search.toLowerCase();
+    
+    if (searchL){
+
+    setFilteredLocation(searchL);
+
+    } 
+
+ 
+      if (!search && !isAdult && !isPuppy && !isSenior) {
+        setFilteredDogs(dogs);
+        setFilteredLocation("");
+      } else if (!search && (isAdult || isPuppy || isSenior)) {
+        setFilteredLocation("");
+        if (isPuppy) {
+          filterResult = dogs.filter((dog) => dog.age <= 2);
+        } else if (isAdult) {
+          filterResult = dogs.filter((dog) => dog.age > 2 && dog.age < 6);
+        } else if (isSenior) {
+          filterResult = dogs.filter((dog) => dog.age > 6);
+        }
+        
+        setFilteredDogs(filterResult);
+      }
+
   };
 
+  useEffect(()=>{
+
+ filter();
+
+
+  },[filteredLocation])
+  
+
   const handleSearch = (e) => {
+    
     setSearch(e.target.value);
   };
 
-  console.log(search);
+ 
 
   return (
     <div className="relative isolate pt-6">
@@ -99,44 +156,58 @@ function HomePage() {
                 </div>
                 <button
                   className="flex ml-4 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                  type="submit"
-                >
+                  type="submit">
                   Search
                 </button>
               </form>
+              <Filter></Filter>
               <br></br>
 
-              <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-
-              {/* Use isLoading to determine when to show the LoadingSpinner */}
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : (
-                <>
-                {filteredDogs.length > 0 && dogs.length > 0 ? (
-  filteredDogs.map((profile) => (
-    <li className="flex flex-wrap justify-center" key={profile._id}>
-      <div className="group w-full overflow-hidden rounded-lg shadow-md">
-        <div className="aspect-h-5 aspect-w-6">
-          <img className="pointer-events-none object-cover group-hover:opacity-75" src={profile.image[0]} alt={profile.name} />
-        </div>
-        <div className="px-4 pb-4">
-        <h3 className="pointer-events-none mt-2 block truncate text-lg font-medium text-gray-900">{profile.name}</h3>
-        <p className="pointer-events-none block text-md font-medium text-gray-500 mb-1">{profile.breed}</p>
-        <p className="pointer-events-none block text-md font-medium text-gray-400 mb-3">{profile.shelterName}</p>
-        <Link to={`/view/${profile._id}`}>
-        <button className="py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded">View</button>
-        </Link>
-        </div>
-      </div>
-    </li>
-  ))
-                  ) : (
-                    <h3>No dogs available in this city.</h3>
-                  )}
-                </>
-              )}
-
+              <ul
+                role="list"
+                className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+                {/* Use isLoading to determine when to show the LoadingSpinner */}
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  <>
+                    {filteredDogs.length > 0 && dogs.length > 0 ? (
+                      filteredDogs.map((profile) => (
+                        <li
+                          className="flex flex-wrap justify-center"
+                          key={profile._id}>
+                          <div className="group w-full overflow-hidden rounded-lg shadow-md">
+                            <div className="aspect-h-5 aspect-w-6">
+                              <img
+                                className="pointer-events-none object-cover group-hover:opacity-75"
+                                src={profile.image[0]}
+                                alt={profile.name}
+                              />
+                            </div>
+                            <div className="px-4 pb-4">
+                              <h3 className="pointer-events-none mt-2 block truncate text-lg font-medium text-gray-900">
+                                {profile.name}
+                              </h3>
+                              <p className="pointer-events-none block text-md font-medium text-gray-500 mb-1">
+                                {profile.breed}
+                              </p>
+                              <p className="pointer-events-none block text-md font-medium text-gray-400 mb-3">
+                                {profile.shelterName}
+                              </p>
+                              <Link to={`/view/${profile._id}`}>
+                                <button className="py-1 px-3 bg-transparent hover:bg-gray-200 text-gray-500 font-semibold hover:text-gray-700 border border-gray-500 hover:border-transparent rounded">
+                                  View
+                                </button>
+                              </Link>
+                            </div>
+                          </div>
+                        </li>
+                      ))
+                    ) : (
+                      <h3>No dogs available.</h3>
+                    )}
+                  </>
+                )}
               </ul>
             </div>
           </div>

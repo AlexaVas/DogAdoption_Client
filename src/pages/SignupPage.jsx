@@ -6,7 +6,7 @@ import axios from "axios";
 import logo from "/src/assets/logo.svg";
 
 
-const API_URL = "https://clear-bee-dress.cyclic.app/";
+const API_URL = "http://localhost:5008";
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");

@@ -7,7 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import Gpt from "../components/Gpt";
 import Gallery from "../components/Gallery";
 
-const API_URL = "https://clear-bee-dress.cyclic.app/";
+const API_URL = "http://localhost:5008";
 
 function ViewPage() {
   const { user } = useContext(AuthContext);
