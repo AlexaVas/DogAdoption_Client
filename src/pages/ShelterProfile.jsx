@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { HomeIcon } from "@heroicons/react/24/outline";
 
-const API_URL = "http://localhost:5008";
+const API_URL = "https://clear-bee-dress.cyclic.app/ ";
 
 function ShelterProfile() {
   const [myDogs, setMyDogs] = useState([]);

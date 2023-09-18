@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5008";
+const API_URL = "https://clear-bee-dress.cyclic.app/ ";
 
 function EditDogPage(props) {
   const [name, setName] = useState("");
