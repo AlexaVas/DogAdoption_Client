@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const API_URL = "https://clear-bee-dress.cyclic.app/ ";
+const API_URL = "https://clear-bee-dress.cyclic.app";
 
 const AuthContext = React.createContext();
 
