@@ -9,7 +9,7 @@ import { useFilteredDogsContext } from "../context/filter.context";
 
 // import { AuthContext } from "../context/auth.context";
 
-const API_URL = "https://clear-bee-dress.cyclic.app/";
+const API_URL = "https://clear-bee-dress.cyclic.app";
 
 function HomePage() {
   // Define the LoadingSpinner component

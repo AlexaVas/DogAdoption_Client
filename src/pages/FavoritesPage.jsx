@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-const API_URL = "https://clear-bee-dress.cyclic.app/";
+const API_URL = "https://clear-bee-dress.cyclic.app";
 
 function FavoritesPage() {
   const [myDogs, setMyDogs] = useState();
